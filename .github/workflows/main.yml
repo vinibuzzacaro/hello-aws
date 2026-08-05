@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: sa-east-1
+  AWS_REGION: us-east-2
   ECR_REPOSITORY: hello-aws
   AWS_IAM_ROLE: arn:aws:iam::355103369647:role/github-actions-role
 
