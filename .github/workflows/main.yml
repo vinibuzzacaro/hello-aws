@@ -12,7 +12,7 @@ env:
   AWS_REGION: us-east-2
   IMAGE_TAG: ${{ github.sha }}
   ECR_REPOSITORY: hello-aws
-  $EC2_INSTANCE_ID: i-0bbd45b10eac2fca4
+  EC2_INSTANCE_ID: i-0bbd45b10eac2fca4
   AWS_IAM_ROLE: arn:aws:iam::355103369647:role/github-actions-role
 
 jobs:
