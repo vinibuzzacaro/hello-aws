@@ -1,7 +1,7 @@
 IMAGE_TAG="$1"
 ACCOUNT_ID="355103369647"
 REPO="hello-aws"
-REGION="us-east-1"
+REGION="us-east-2"
 IMAGE="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$IMAGE_TAG"
 CONTAINER_NAME="app"
 
