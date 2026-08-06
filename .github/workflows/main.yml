@@ -10,6 +10,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-2
+  IMAGE_TAG: ${{ github.sha }}
   ECR_REPOSITORY: hello-aws
   AWS_IAM_ROLE: arn:aws:iam::355103369647:role/github-actions-role
 
@@ -46,7 +47,14 @@ jobs:
       - name: Build and push Docker image
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Deploy with SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids "$EC2_INSTANCE_ID" \
+            --document-name "AWS-RunShellScript" \
+            --parameters commands="/opt/app/deploy.sh $IMAGE_TAG" \
+            --query "Command.CommandId" --output text
