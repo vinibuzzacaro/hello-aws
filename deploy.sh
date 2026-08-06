@@ -29,6 +29,8 @@ for i in {1..12}; do
     docker image prune -af --filter "until=168h" || true
     exit 0
   fi
+  echo "Attempt $i: Health check failed, retrying in 5s..."
+  sleep 5
 done
 
 echo "Health check failed after deployment." >&2
